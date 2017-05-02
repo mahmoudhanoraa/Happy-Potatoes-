@@ -1,14 +1,43 @@
 package happy.potatoes;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
+
 /**
  *
  * @author Sad Potateos
  */
 public class NyanCat extends GridElement{
-    private boolean drugged;
+    private boolean drugged=false;
     private String sound;
     private boolean singing;
     private int numLifes;
+    
+    //drugNyan by mazen
+    
+    public void drugNyan(){
+        setDrawable("drug.gif");
+        drugged=true;
+        Timer timer;
+        timer = new Timer(10000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                setDrawable("nyan.gif");
+                drugged=false;
+                // Code to be executed
+            }
+        });
+        timer.setRepeats(false); // Only execute once
+        timer.start(); // Go go go!
+    }
+    //functions to move cat up and down easily
+    public void nyanUp(){
+        if(getBound().getY()>=180) getBound().setY(getBound().getY()-170);
+    }
+    public void nyanDown(){
+        if(getBound().getY()<=520) getBound().setY(getBound().getY()+170);
+    }
     
     public NyanCat(Bound bound, String drawable){
         super(bound, drawable);
