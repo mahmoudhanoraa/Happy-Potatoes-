@@ -9,13 +9,11 @@ public class NyanCat extends GridElement{
     private String sound;
     private boolean singing;
     private int numLifes;
-
-    public NyanCat(boolean drugged, String sound, boolean singing, int numLifes) {
-        this.drugged = drugged;
-        this.sound = sound;
-        this.singing = singing;
-        this.numLifes = numLifes;
+    
+    public NyanCat(Bound bound, String drawable){
+        super(bound, drawable);
     }
+
     // todo check drugged usage
     public NyanCat(boolean drugged, String sound, boolean singing, int numLifes, Bound bound, String drawable) {
         super(bound, drawable);
