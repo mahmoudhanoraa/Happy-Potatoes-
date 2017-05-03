@@ -63,7 +63,7 @@ public class Grid extends JPanel implements ActionListener{
     public void paint(Graphics g){
         super.paint(g);
         ImageIcon bg = new ImageIcon("./Drawables/bg.gif");
-        g.drawImage(bg.getImage(), 0, 0, 1440, 900, this);
+        g.drawImage(bg.getImage(), 0, 0, 1440, 850, this);
         
         //renamed ImageIcon nyan to nyanIcon because it conflicted with object nyan from clas nyanCat
         ImageIcon nyanIcon = new ImageIcon("./Drawables/" + this.nyan.getDrawable());

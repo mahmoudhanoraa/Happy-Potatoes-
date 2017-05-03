@@ -1,5 +1,6 @@
 package happy.potatoes;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -9,6 +10,7 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class HappyPotatoes {
@@ -54,19 +56,20 @@ public class HappyPotatoes {
     public static void main(String[] args) {
         
         JFrame f = new JFrame();
-        f.setSize(1440, 1000);
-        JLabel scoreLabel = new JLabel(""+score);
-        scoreLabel.setBounds(0,950,30,30);
-        f.getContentPane().add(scoreLabel);
+        f.setSize(1440, 900);
+        JLabel scoreLabel = new JLabel("Score : "+score);
+        JPanel labelPnl = new JPanel();
+        labelPnl.add(scoreLabel);
+        f.getContentPane().add(labelPnl,BorderLayout.SOUTH);
         f.setLocationRelativeTo(null);
-        gameGrid.setBounds(0, 0, 1440, 900);
+        gameGrid.setBounds(0, 0, 1440, 840);
         f.getContentPane().add(gameGrid);
         f.setResizable(false);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
         gameGrid.setFocusable(true);
         Timer timerNorm;
-        timerNorm = new Timer(900, new ActionListener() {
+        timerNorm = new Timer(1100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 addNormals();
@@ -74,10 +77,9 @@ public class HappyPotatoes {
             }
         });
         timerNorm.setRepeats(true); // Only execute once
-        timerNorm.start(); // Go go go!
         
         Timer timerSp;
-        timerSp = new Timer(5500, new ActionListener() {
+        timerSp = new Timer(6000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 addSpecials();
@@ -85,7 +87,6 @@ public class HappyPotatoes {
             }
         });
         timerSp.setRepeats(true); // Only execute once
-        timerSp.start(); // Go go go!
         
         Timer timerMove;
         timerMove = new Timer(1, new ActionListener() {
@@ -114,8 +115,7 @@ public class HappyPotatoes {
                     score += collider.getScore();
                     System.out.println(score);
                     gameGrid.getEdibles().remove(colliderInd);
-                    scoreLabel.setText(""+score);
-                    f.repaint();
+                    scoreLabel.setText("Score : "+score);
 
                 }
                 
@@ -123,15 +123,15 @@ public class HappyPotatoes {
                     JOptionPane.showMessageDialog(null, "Game Over " + score);
                     System.exit(0);
                 }
-//                scoreLabel.setText(""+score);
-//                f.repaint();
 
             }
             
         });
-        timerMove.setRepeats(true); // Only execute once
-        timerMove.start(); // Go go go!
-        
+        timerMove.setRepeats(true);
+        timerMove.start();
+        timerSp.start();
+        timerNorm.start();
+
         
         //moved keylistener from grid to main class because it was getting repainted inside paint() method million times which caused exceptions 
         //after few seconds of run time
