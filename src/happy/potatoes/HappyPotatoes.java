@@ -2,6 +2,8 @@ package happy.potatoes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JFrame;
@@ -42,7 +44,7 @@ public class HappyPotatoes {
         int ind = rand.nextInt(2);
         String spName = specials[ind];
         if(spName.equals("potato.png")){
-            gameGrid.getEdibles().add(new Edible(0, 0, null, 1440, rand.nextInt(5)*170, 160, 160, spName));
+            gameGrid.getEdibles().add(new Edible(100, 0, null, 1440, rand.nextInt(5)*170, 160, 160, spName));
         }
         else{
             gameGrid.getEdibles().add(new Edible(100, 1, null, 1440, rand.nextInt(5)*170, 160, 160, spName));
@@ -54,7 +56,7 @@ public class HappyPotatoes {
         JFrame f = new JFrame();
         f.setSize(1440, 1000);
         JLabel scoreLabel = new JLabel(""+score);
-        scoreLabel.setBounds(0,900,100,100);
+        scoreLabel.setBounds(0,950,30,30);
         f.getContentPane().add(scoreLabel);
         f.setLocationRelativeTo(null);
         gameGrid.setBounds(0, 0, 1440, 900);
@@ -64,7 +66,7 @@ public class HappyPotatoes {
         f.setVisible(true);
         gameGrid.setFocusable(true);
         Timer timerNorm;
-        timerNorm = new Timer(1550, new ActionListener() {
+        timerNorm = new Timer(900, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 addNormals();
@@ -75,7 +77,7 @@ public class HappyPotatoes {
         timerNorm.start(); // Go go go!
         
         Timer timerSp;
-        timerSp = new Timer(5000, new ActionListener() {
+        timerSp = new Timer(5500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 addSpecials();
@@ -129,7 +131,29 @@ public class HappyPotatoes {
         });
         timerMove.setRepeats(true); // Only execute once
         timerMove.start(); // Go go go!
-
+        
+        
+        //moved keylistener from grid to main class because it was getting repainted inside paint() method million times which caused exceptions 
+        //after few seconds of run time
+            gameGrid.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e){
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+                   if(gameGrid.nyan.isDrugged()) gameGrid.nyan.nyanDown();
+                   else gameGrid.nyan.nyanUp();
+                   System.out.println("up");
+                   gameGrid.repaint();
+                   e.setKeyCode(0);
+                }
+                if(e.getKeyCode()==KeyEvent.VK_DOWN){
+                   if(gameGrid.nyan.isDrugged()) gameGrid.nyan.nyanUp();
+                   else gameGrid.nyan.nyanDown();
+                   System.out.println("down");
+                   gameGrid.repaint();
+                   e.setKeyCode(0);
+                }
+             }
+        });
     }
     
     

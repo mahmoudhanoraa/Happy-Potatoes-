@@ -80,25 +80,7 @@ public class Grid extends JPanel implements ActionListener{
 
         g.drawImage(nyanIcon.getImage(),nyan.getBound().getX() , nyan.getBound().getY(), nyan.getBound().getHeight(), nyan.getBound().getWidth(), this);
         //mazen adding keylistener for the cat inside the grid
-        this.addKeyListener(new KeyAdapter(){
-            @Override
-            public void keyPressed(KeyEvent e){
-                if(e.getKeyCode()==KeyEvent.VK_UP){
-                   if(nyan.isDrugged()) nyan.nyanDown();
-                   else nyan.nyanUp();
-                   System.out.println("up");
-                   repaint();
-                   e.setKeyCode(0);
-                }
-                if(e.getKeyCode()==KeyEvent.VK_DOWN){
-                   if(nyan.isDrugged()) nyan.nyanUp();
-                   else nyan.nyanDown();
-                   System.out.println("down");
-                   repaint();
-                   e.setKeyCode(0);
-                }
-             }
-        });
     }
+    
     
 }
