@@ -53,13 +53,9 @@ public class Edible extends GridElement{
     }
 
     @Override
-    protected boolean inCollision(Bound bound) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     protected boolean move() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.getBound().setX(this.getBound().getX() - 2);
+        return true;
     }
 
     @Override

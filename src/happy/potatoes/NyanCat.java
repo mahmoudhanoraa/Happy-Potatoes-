@@ -34,14 +34,15 @@ public class NyanCat extends GridElement{
     
     //functions to move cat up and down easily
     public void nyanUp(){
-        if(getBound().getY()>=180) getBound().setY(getBound().getY()-170);
+        if(getBound().getY()>=170) getBound().setY(getBound().getY()-170);
     }
     public void nyanDown(){
         if(getBound().getY()<=520) getBound().setY(getBound().getY()+170);
     }
     
-    public NyanCat(Bound bound, String drawable){
+    public NyanCat(Bound bound, String drawable, int numLifes){
         super(bound, drawable);
+        this.numLifes = numLifes;
     }
 
     // todo check drugged usage
@@ -100,11 +101,6 @@ public class NyanCat extends GridElement{
     
     // todo fire when game mode is space invadeors
     public void fire(Bound bound){}
-
-    @Override
-    protected boolean inCollision(Bound bound) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     protected boolean move() {

@@ -36,7 +36,12 @@ public abstract class GridElement {
         this.drawable = drawable;
     }
     
-    protected abstract boolean inCollision(Bound bound);
+    protected boolean inCollision(Bound bound){
+        if(408 >= this.bound.getX() && this.bound.getX() >= 204 &&bound.getY()==this.bound.getY()){
+            return true;
+        }
+        return false;
+    }
     protected abstract boolean move();
     protected abstract boolean isVisible();
     protected abstract boolean joinGrid(Bound bound);

@@ -41,10 +41,18 @@ public class Grid extends JPanel implements ActionListener{
         return shoots;
     }
     
+    
    // todo
    public Shoot collisionWithShoot(){return null;}
    // tode
-   public Edible collisionWithEdible(){return null;}
+   public int collisionWithEdible(){
+       for(int i = 0; i < this.edibles.size(); i++){
+           if(this.edibles.get(i).inCollision(this.nyan.getBound())){
+               return i;
+           }
+       }
+       return -1;
+   }    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -55,14 +63,19 @@ public class Grid extends JPanel implements ActionListener{
     public void paint(Graphics g){
         super.paint(g);
         ImageIcon bg = new ImageIcon("./Drawables/bg.gif");
-        g.drawImage(bg.getImage(), 0, 0, 1440, 960, this);
+        g.drawImage(bg.getImage(), 0, 0, 1440, 900, this);
         
         //renamed ImageIcon nyan to nyanIcon because it conflicted with object nyan from clas nyanCat
         ImageIcon nyanIcon = new ImageIcon("./Drawables/" + this.nyan.getDrawable());
         
-        for(Edible edible : this.edibles){
-            ImageIcon edibleIcon = new ImageIcon("./Drawables/" + edible.getDrawable());
-            g.drawImage(edibleIcon.getImage(), edible.getBound().getX(), edible.getBound().getY(), edible.getBound().getWidth(), edible.getBound().getHeight(), this);
+        for(int i = 0; i < this.edibles.size(); i++){
+            if(this.edibles.get(i).getBound().getX() <= -160    ){
+                this.edibles.remove(i);
+                System.out.println("delete and element");
+                continue;
+            }
+            ImageIcon edibleIcon = new ImageIcon("./Drawables/" + this.edibles.get(i).getDrawable());
+            g.drawImage(edibleIcon.getImage(), this.edibles.get(i).getBound().getX(), this.edibles.get(i).getBound().getY(), this.edibles.get(i).getBound().getWidth(), this.edibles.get(i).getBound().getHeight(), this);
         }
 
         g.drawImage(nyanIcon.getImage(),nyan.getBound().getX() , nyan.getBound().getY(), nyan.getBound().getHeight(), nyan.getBound().getWidth(), this);
