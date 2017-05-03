@@ -31,6 +31,7 @@ public class NyanCat extends GridElement{
         timer.setRepeats(false); // Only execute once
         timer.start(); // Go go go!
     }
+    
     //functions to move cat up and down easily
     public void nyanUp(){
         if(getBound().getY()>=180) getBound().setY(getBound().getY()-170);

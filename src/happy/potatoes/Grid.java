@@ -56,14 +56,15 @@ public class Grid extends JPanel implements ActionListener{
         super.paint(g);
         ImageIcon bg = new ImageIcon("./Drawables/bg.gif");
         g.drawImage(bg.getImage(), 0, 0, 1440, 960, this);
+        
         //renamed ImageIcon nyan to nyanIcon because it conflicted with object nyan from clas nyanCat
         ImageIcon nyanIcon = new ImageIcon("./Drawables/" + this.nyan.getDrawable());
-        //int nyanHeight = this.nyan.getBound().getHeight();
-        //int nyanWidth = this.nyan.getBound().getWidth();
-        //int nyanX = this.nyan.getBound().getX();          i don't really find them usefull as they don't change the
-        //int nyanY = this.nyan.getBound().getY();          real position of the cat, and it will cause redundancy if we change both
         
-        
+        for(Edible edible : this.edibles){
+            ImageIcon edibleIcon = new ImageIcon("./Drawables/" + edible.getDrawable());
+            g.drawImage(edibleIcon.getImage(), edible.getBound().getX(), edible.getBound().getY(), edible.getBound().getWidth(), edible.getBound().getHeight(), this);
+        }
+
         g.drawImage(nyanIcon.getImage(),nyan.getBound().getX() , nyan.getBound().getY(), nyan.getBound().getHeight(), nyan.getBound().getWidth(), this);
         //mazen adding keylistener for the cat inside the grid
         this.addKeyListener(new KeyAdapter(){
