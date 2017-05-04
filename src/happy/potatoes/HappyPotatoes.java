@@ -24,7 +24,7 @@ public class HappyPotatoes {
         Random rand = new Random();
         int ind = rand.nextInt(7);
         String normalName = normals[ind];
-        if(normalName.equals("tuna.png") || normalName.equals("dry.png") || normalName.equals("mouse.png") || normalName.equals("chicken.png")){
+        if(i>=0&&i<=3)){
             gameGrid.getEdibles().add(new Edible(100, 0, null, 1440, rand.nextInt(5)*170, 160, 160, normalName));
         }
         
@@ -46,10 +46,10 @@ public class HappyPotatoes {
         int ind = rand.nextInt(2);
         String spName = specials[ind];
         if(spName.equals("potato.png")){
-            gameGrid.getEdibles().add(new Edible(100, 0, null, 1440, rand.nextInt(5)*170, 160, 160, spName));
+            gameGrid.getEdibles().add(new Edible(100, 1, null, 1440, rand.nextInt(5)*170, 160, 160, spName));
         }
         else{
-            gameGrid.getEdibles().add(new Edible(100, 1, null, 1440, rand.nextInt(5)*170, 160, 160, spName));
+            gameGrid.getEdibles().add(new Edible(100, 0, null, 1440, rand.nextInt(5)*170, 160, 160, spName));
         }
     }
         
@@ -58,8 +58,10 @@ public class HappyPotatoes {
         JFrame f = new JFrame();
         f.setSize(1440, 900);
         JLabel scoreLabel = new JLabel("Score : "+score);
+        JLabel livesLabel = new JLabel("Lives : "+gameGrid.getNyan().getNumLifes());
         JPanel labelPnl = new JPanel();
         labelPnl.add(scoreLabel);
+        labelPnl.add(livesLabel);
         f.getContentPane().add(labelPnl,BorderLayout.SOUTH);
         f.setLocationRelativeTo(null);
         gameGrid.setBounds(0, 0, 1440, 840);
@@ -116,6 +118,7 @@ public class HappyPotatoes {
                     System.out.println(score);
                     gameGrid.getEdibles().remove(colliderInd);
                     scoreLabel.setText("Score : "+score);
+                    livesLabel.setText("Lives : "+gameGrid.getNyan().getNumLifes());
 
                 }
                 
