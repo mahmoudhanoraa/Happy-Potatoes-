@@ -71,16 +71,14 @@ public class Grid extends JPanel implements ActionListener{
         for(int i = 0; i < this.edibles.size(); i++){
             if(this.edibles.get(i).getBound().getX() <= -160    ){
                 this.edibles.remove(i);
-                System.out.println("delete and element");
+                System.out.println("delete an element");
+                i--;
                 continue;
             }
             ImageIcon edibleIcon = new ImageIcon("./Drawables/" + this.edibles.get(i).getDrawable());
             g.drawImage(edibleIcon.getImage(), this.edibles.get(i).getBound().getX(), this.edibles.get(i).getBound().getY(), this.edibles.get(i).getBound().getWidth(), this.edibles.get(i).getBound().getHeight(), this);
         }
-
         g.drawImage(nyanIcon.getImage(),nyan.getBound().getX() , nyan.getBound().getY(), nyan.getBound().getHeight(), nyan.getBound().getWidth(), this);
         //mazen adding keylistener for the cat inside the grid
     }
-    
-    
 }
