@@ -24,7 +24,7 @@ public class HappyPotatoes {
         Random rand = new Random();
         int ind = rand.nextInt(7);
         String normalName = normals[ind];
-        if(ind>=0 && ind<=3){
+        if(ind>=0&&ind<=3){
             gameGrid.getEdibles().add(new Edible(100, 0, null, 1440, rand.nextInt(5)*170, 160, 160, normalName));
         }
         
